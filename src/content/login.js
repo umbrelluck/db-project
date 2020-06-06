@@ -13,7 +13,6 @@ export default class Login extends React.Component {
                     <button>Human</button>
                 </NavLink>
             </div>
-
         )
     }
 }
