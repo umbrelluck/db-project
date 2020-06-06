@@ -18,19 +18,40 @@ html{
     margin-bottom: 0.3%;  
     margin-right: 1%;
     font-size: 1.1rem;
-    border:none;
-
+    
     display: inline-block;
     text-align: center;
+    border:none;
     /* background: #8B8B8B; */
 
     color: black;
-
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 #login button:hover{
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.go{
+    display: inline-block;
+    text-align: center;
+    border:none;
+    /* background: #8B8B8B; */
+
+    color: black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.go:hover{
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.data_input{
+
+}
+
+.result{
+    
 }
 
 #human{

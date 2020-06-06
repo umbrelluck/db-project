@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 var GO = ({ url, fun }) => (
     <NavLink to={url + '/result'}>
-        <button onClick={fun}>GO</button>
+        <button className="go" onClick={fun}>GO</button>
     </NavLink>
 )
 export default GO;
