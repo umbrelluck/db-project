@@ -1,9 +1,11 @@
 import React from 'react'
 
 var Footer = () => (
-    <p>
-        working with aliens for too long
-    </p>
+    <footer>
+        <p>
+            Finest cooperation with aliens since 1984
+        </p>
+    </footer>
 );
 
 export default Footer;
