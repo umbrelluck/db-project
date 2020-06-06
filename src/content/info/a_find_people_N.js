@@ -4,10 +4,10 @@ import GO from '../GO'
 import Result from '../result'
 import { Route } from 'react-router-dom'
 
-export default class Aexcursion extends React.Component {
+export default class AFindNPeople extends React.Component {
 
     handler() {
-        console.log("Handler for excursion")
+        console.log("Handler for finding N people")
     }
     render() {
         // var url = this.props.match.url.substring(0, this.props.match.url.length - 3);
@@ -15,7 +15,7 @@ export default class Aexcursion extends React.Component {
         return (
             <div className="data_input">
                 <input placeholder="Alien"></input>
-                {/* <input></input> */}
+                <input placeholder='Number'></input>
                 <GO fun={this.handler} url={url}></GO>
                 <Route path={this.props.match.url + '/result'} component={Result} />
             </div>

@@ -13,7 +13,7 @@ export default class Hescape extends React.Component {
         // var url = this.props.match.url.substring(0, this.props.match.url.length - 3);
         var url = this.props.match.url;
         return (
-            <div id='hescape'>
+            <div className="data_input">
                 <input placeholder="Human"></input>
                 {/* <input></input> */}
                 <GO fun={this.handler} url={url}></GO>

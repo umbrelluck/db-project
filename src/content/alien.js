@@ -1,6 +1,12 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 
+import AFindNPeople from './info/a_find_people_N'
+import AAllFindNPeople from './info/a_all_find_people_N'
+import AExcAndExp from './info/a_find_exc&exp'
+import AExcursion from './info/a_excursion'
+import AExperiment from './info/a_experiment'
+
 import Aexcursion from './events/a_excursion'
 import Aexperiment from './events/a_experiment'
 import Akidnap from './events/a_kidnap'
@@ -29,6 +35,12 @@ export default class Alien extends React.Component {
                     <li><NavLink to={this.props.match.url + '/e3'}>Провести експеримент</NavLink></li>
                     <li><NavLink to={this.props.match.url + '/e4'}>Провести екскурсію</NavLink></li>
                 </ul>
+
+                <Route path={this.props.match.url + '/i1'} component={AFindNPeople} />
+                <Route path={this.props.match.url + '/i2'} component={AAllFindNPeople} />
+                <Route path={this.props.match.url + '/i3'} component={AExcAndExp} />
+                <Route path={this.props.match.url + '/i4'} component={AExcursion} />
+                <Route path={this.props.match.url + '/i5'} component={AExperiment} />
 
                 <Route path={this.props.match.url + '/e1'} component={Akidnap} />
                 <Route path={this.props.match.url + '/e2'} component={Atransport} />

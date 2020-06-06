@@ -13,7 +13,7 @@ export default class Atransport extends React.Component {
         // var url = this.props.match.url.substring(0, this.props.match.url.length - 3);
         var url = this.props.match.url;
         return (
-            <div id='atransport'>
+            <div className="data_input">
                 <input placeholder="Alien"></input>
                 <input placeholder="Human"></input>
                 <input placeholder="Destination"></input>
