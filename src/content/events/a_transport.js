@@ -19,7 +19,7 @@ export default class Atransport extends React.Component {
                 <input placeholder="Destination"></input>
                 {/* <input></input> */}
                 <GO fun={this.handler} url={url}></GO>
-                <Route path={this.props.match.url + '/result'} component={Result} />
+                <Route path={this.props.match.url + '/result'} render={() => (<Result />)} />
             </div>
         )
     }

@@ -18,7 +18,7 @@ export default class AEcxAndExp extends React.Component {
                 <input placeholder='Human'></input>
                 <input placeholder='Time'></input>
                 <GO fun={this.handler} url={url}></GO>
-                <Route path={this.props.match.url + '/result'} component={Result} />
+                <Route path={this.props.match.url + '/result'} render={() => (<Result />)} />
             </div>
         )
     }

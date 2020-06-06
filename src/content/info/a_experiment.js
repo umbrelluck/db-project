@@ -17,7 +17,7 @@ export default class AExperiments extends React.Component {
                 <input placeholder="Alien"></input>
                 <input placeholder='Time'></input>
                 <GO fun={this.handler} url={url}></GO>
-                <Route path={this.props.match.url + '/result'} component={Result} />
+                <Route path={this.props.match.url + '/result'} render={() => (<Result />)} />
             </div>
         )
     }

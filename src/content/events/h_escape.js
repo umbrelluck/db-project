@@ -2,7 +2,7 @@ import React from 'react'
 import GO from '../GO'
 
 import Result from '../result'
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 export default class Hescape extends React.Component {
 
@@ -17,7 +17,7 @@ export default class Hescape extends React.Component {
                 <input placeholder="Human"></input>
                 {/* <input></input> */}
                 <GO fun={this.handler} url={url}></GO>
-                <Route path={this.props.match.url + '/result'} component={Result} />
+                <Route path={this.props.match.url + '/result'} render={() => (<Result />)} />
             </div>
         )
     }

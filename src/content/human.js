@@ -1,6 +1,14 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 
+import HFindAliens from './info/h_find_aliens'
+import HFindShips from './info/h_find_all_ships'
+import HFindExp from './info/h_find_experimentators'
+import HFindMurders from './info/h_find_murders'
+import HStolenAndMurdered from './info/h_stolen&murdered'
+import HStolenN from './info/h_stolenN'
+import HTotal from './info/h_total_month'
+
 import Hescape from './events/h_escape'
 import HKill from './events/h_kill'
 
@@ -32,6 +40,14 @@ export default class Human extends React.Component {
                 {/* <NavLink to={this.props.match.url + '/result'}>
                     <button >GO</button>
                 </NavLink> */}
+
+                <Route path={this.props.match.url + '/i1'} component={HFindShips} />
+                <Route path={this.props.match.url + '/i2'} component={HFindAliens} />
+                <Route path={this.props.match.url + '/i3'} component={HFindMurders} />
+                <Route path={this.props.match.url + '/i4'} component={HStolenAndMurdered} />
+                <Route path={this.props.match.url + '/i5'} component={HStolenN} />
+                <Route path={this.props.match.url + '/i6'} component={HFindExp} />
+                <Route path={this.props.match.url + '/i7'} component={HTotal} />
 
                 <Route path={this.props.match.url + '/e1'} component={Hescape} />
                 <Route path={this.props.match.url + '/e2'} component={HKill} />
