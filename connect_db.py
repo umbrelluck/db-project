@@ -54,7 +54,7 @@ def select_human_ships(conn, human_id, date_from, date_to):
 # відповідні назви SELECTів в ексельці, SELECTи в db.sql
 
 # 3. • для людини H знайти усiх прибульцiв, якi викрадали її хоча б N разiв за вказаний перiод
-def select_human_kidnapping_aliens(conn, human_id, date_from, date_to):
+def select_human_kidnapping_aliens(conn, human_id, n_times, date_from, date_to):
     cur = conn.cursor()
 
     query = """
@@ -69,9 +69,9 @@ def select_human_kidnapping_aliens(conn, human_id, date_from, date_to):
             AND human.id = %s
             GROUP BY alien.name
             -- N times condition
-            HAVING COUNT(on_boarding.id_alien)>=1 ;
+            HAVING COUNT(on_boarding.id_alien)>=%s ;
         """
-    data = (date_from, date_to, human_id)
+    data = (date_from, date_to, human_id, n_times)
     cur.execute(query, data)
     return cur.fetchall()
 
@@ -281,8 +281,12 @@ def alien_kidnaps_human(conn, date, id_ship_to, id_human, id_alien):
     cur = conn.cursor()
     data = ({"date": date,
              "id_ship_to": id_ship_to, "id_human": id_human, "id_alien": id_alien})
-    cur.execute(query, data)
-    # return cur.fetchall()
+    try:
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
 
 
 # -- людина тікає з космічного корабля
@@ -298,8 +302,13 @@ def human_escapes_from_the_ship(conn, date, id_ship_from, id_human):
 
     cur = conn.cursor()
     data = ({"date": date, "id_ship_from": id_ship_from, "id_human": id_human})
-    cur.execute(query, data)
-    # return cur.fetchall()
+
+    try:
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
 
 
 # -- прибулець транспортує людину на iнший корабель
@@ -316,8 +325,14 @@ def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_al
     cur = conn.cursor()
     data = ({"date": date, "id_ship_from": id_ship_from,
              "id_ship_to": id_ship_to, "id_human": id_human, "id_alien": id_alien})
-    cur.execute(query, data)
-    # return cur.fetchall()
+    
+    try:
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
+
 
 
 # -- людина вбиває прибульця
@@ -334,7 +349,13 @@ def human_kills_alien(conn, date, weapon, id_ship, id_human, id_alien):
     cur = conn.cursor()
     data = ({"date": date, "weapon": weapon, "id_ship": id_ship,
              "id_human": id_human, "id_alien": id_alien})
-    cur.execute(query, data)
+    try:
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
+
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 import React from 'react'
 import GO from '../GO'
 import axios from 'axios'
-import BigInt from 'big-integer'
 
 import Result from '../result'
 import { Route } from 'react-router-dom'
@@ -40,7 +39,7 @@ export default class AAllFindNPeople extends React.Component {
             if (cnt !== 0)
                 res.push(elem.value)
             else
-                res.push(BigInt(elem.value))
+                res.push(Number(elem.value))
             cnt++;
         }
         console.log(this.lst, res);

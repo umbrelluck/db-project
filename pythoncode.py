@@ -207,6 +207,80 @@ def get_select_alien_ships_experiments():
         return str(e)
 
 
+# -- прибулець викрадає людину
+@app.route('/get_alien_kidnaps_human', methods=["GET"])
+def get_alien_kidnaps_human():
+    try:
+        date, id_ship_to, id_human, id_alien = request.args.get('date', ''), \
+            request.args.get('id_ship_to', ''), \
+            request.args.get('id_human', ''), \
+            request.args.get('id_alien', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = alien_kidnaps_human(conn,  date, id_ship_to, id_human, id_alien)
+        return jsonify(result=word)
+    except Exception as e:
+        return str(e)
+
+
+# -- людина тікає з космічного корабля
+@app.route('/get_human_escapes_from_the_ship', methods=["GET"])
+def get_human_escapes_from_the_ship():
+    try:
+        date, id_ship_from, id_human = request.args.get('date', ''), \
+            request.args.get('id_ship_from', ''), \
+            request.args.get('id_human', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = human_escapes_from_the_ship(conn,  date, id_ship_from, id_human)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+
+# -- прибулець транспортує людину на iнший корабель
+@app.route('/get_alien_transports_human', methods=["GET"])
+def get_alien_transports_human():
+    try:
+        date, id_ship_from, id_ship_to, id_human, id_alien = request.args.get('date', ''), \
+            request.args.get('id_ship_from', ''), \
+            request.args.get('id_ship_to', ''), \
+            request.args.get('id_human', ''), \
+            request.args.get('id_alien', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = alien_transports_human(
+            conn,  date, id_ship_from, id_ship_to, id_human, id_alien)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+
+# -- людина вбиває прибульця
+@app.route('/get_human_kills_alien', methods=["GET"])
+def get_human_kills_alien():
+    try:
+        date, weapon, id_ship, id_human, id_alien = request.args.get('date', ''), \
+            request.args.get('weapon', ''), \
+            request.args.get('id_ship', ''), \
+            request.args.get('id_human', ''), \
+            request.args.get('id_alien', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = human_kills_alien(
+            conn,  date, weapon, id_ship, id_human, id_alien)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+
 if __name__ == "__main__":
     app.run()
 # if __name__ == "__main__":
