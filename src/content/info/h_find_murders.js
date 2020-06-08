@@ -8,6 +8,9 @@ import { Route } from 'react-router-dom'
 export default class HFindMurders extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            info: []
+        }
         this.lst = []
     }
 
@@ -21,7 +24,10 @@ export default class HFindMurders extends React.Component {
             }
         });
         console.log("response = ", response)
-        this.lst.push(response.data.result);
+        // this.lst.push(response.data.result);
+        this.setState((state) => ({
+            info: response.data.result
+        }))
     }
 
     handler = () => {
@@ -36,18 +42,24 @@ export default class HFindMurders extends React.Component {
 
 
     render() {
-        if (this.lst.length > 1)
-            this.lst = this.lst.splice(1, 2)
+        // if (this.lst.length > 1)
+        //     this.lst = this.lst.splice(1, 2)
         // var url = this.props.match.url.substring(0, this.props.match.url.length - 3);
         var url = this.props.match.url;
         return (
-            <div className="data_input">
+            (this.state.info.length !== 0) ? <div className="data_input">
                 <input placeholder="Human"></input>
                 <input placeholder='Start date (mnth-day-year)'></input>
                 <input placeholder='End date (mnth-day-year)'></input>
                 <GO fun={this.handler} url={url}></GO>
-                <Route path={this.props.match.url + '/result'} render={() => (<Result info={this.lst} />)} />
-            </div>
+                <Route path={this.props.match.url + '/result'} render={() => (<Result info={this.state.info} />)} />
+            </div> :
+                <div className="data_input">
+                    <input placeholder="Human"></input>
+                    <input placeholder='Start date (mnth-day-year)'></input>
+                    <input placeholder='End date (mnth-day-year)'></input>
+                    <GO fun={this.handler} url={url}></GO>
+                </div>
         )
     }
 };

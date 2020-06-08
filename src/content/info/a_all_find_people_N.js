@@ -11,6 +11,9 @@ export default class AAllFindNPeople extends React.Component {
     constructor(props) {
         super(props);
         this.lst = []
+        this.state = {
+            info: []
+        }
     }
 
     async register(list, number, st_date, end_date) {
@@ -23,13 +26,13 @@ export default class AAllFindNPeople extends React.Component {
             }
         });
         console.log("response = ", response)
-        this.lst.push(response.data.result);
+        // this.lst.push(response.data.result);
+        this.setState((state) => ({
+            info: response.data.result
+        }))
     }
 
     handler = () => {
-        // if (this.lst.length !== 0)
-        //     if (this.lst[0].length === 0)
-        //         this.lst = []
         var res = []
         var cnt = 0
         for (var elem of document.getElementsByTagName('input')) {
@@ -44,18 +47,21 @@ export default class AAllFindNPeople extends React.Component {
         this.register(this.lst, res[0], res[1], res[2]);
     }
     render() {
-        if (this.lst.length > 1)
-            this.lst = this.lst.splice(1, 2)
         // var url = this.props.match.url.substring(0, this.props.match.url.length - 3);
         var url = this.props.match.url;
         return (
-            <div className="data_input">
+            (this.state.info.length !== 0) ? <div className="data_input">
                 <input placeholder='Number'></input>
                 <input placeholder='Start date (mnth-day-year)'></input>
                 <input placeholder='End date (mnth-day-year)'></input>
                 <GO fun={this.handler} url={url}></GO>
-                <Route path={this.props.match.url + '/result'} render={() => (<Result info={this.lst} />)} />
-            </div>
+                <Route path={this.props.match.url + '/result'} render={() => (<Result info={this.state.info} />)} />
+            </div> : <div className="data_input">
+                    <input placeholder='Number'></input>
+                    <input placeholder='Start date (mnth-day-year)'></input>
+                    <input placeholder='End date (mnth-day-year)'></input>
+                    <GO fun={this.handler} url={url}></GO>
+                </div>
         )
     }
 };

@@ -54,7 +54,7 @@ def select_human_ships(conn, human_id, date_from, date_to):
 # відповідні назви SELECTів в ексельці, SELECTи в db.sql
 
 # 3. • для людини H знайти усiх прибульцiв, якi викрадали її хоча б N разiв за вказаний перiод
-def select_human_kidnapping_aliens(conn, human_id, n_times, date_from, date_to):
+def select_human_kidnapping_aliens(conn, human_id, date_from, date_to):
     cur = conn.cursor()
 
     query = """
@@ -62,16 +62,16 @@ def select_human_kidnapping_aliens(conn, human_id, n_times, date_from, date_to):
             FROM alien
             JOIN on_boarding ON on_boarding.id_alien = alien.id
             JOIN human ON human.id = on_boarding.id_human
-            -- data condition   
+            -- data condition
             WHERE on_boarding.date >= %s::date
             AND on_boarding.date < (%s::date + '1 day'::interval)
             -- human condition
             AND human.id = %s
             GROUP BY alien.name
             -- N times condition
-            HAVING COUNT(on_boarding.id_alien)>=%s ;
+            HAVING COUNT(on_boarding.id_alien)>=1 ;
         """
-    data = (date_from, date_to, human_id, n_times)
+    data = (date_from, date_to, human_id)
     cur.execute(query, data)
     return cur.fetchall()
 
@@ -250,7 +250,7 @@ def select_all_kidnappings(conn, year):
 # --       кораблi за участi даного прибульця A протягом вказаного перiоду (з дати F по дату T);
 def select_alien_ships_experiments(conn, alien_id, date_from, date_to):
     query = """
-            # x = SELECT MAX(id)  FROM experiment;
+            -- x = SELECT MAX(id)  FROM experiment;
             SELECT experiment.id_ship, COUNT(*) AS num
             FROM experiment_alien LEFT JOIN experiment
             ON experiment_alien.id_experiment = experiment.id
@@ -267,13 +267,89 @@ def select_alien_ships_experiments(conn, alien_id, date_from, date_to):
     return cur.fetchall()
 
 
-# if __name__ == '__main__':
-#     # Connect to an existing database
-#     # conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-#     #
-#     # res = select_alien_kidnapping(conn, 'Bardan%', 2, '01-05-1972', '01-06-1993')
-#     # res2 = select_human_ships(conn, 5, '02-02-1970', '09-06-1990')
-#     # res3 = select_human_kidnapping_aliens(conn, 16, '1992-03-06', '1992-03-06')
-#     # res4 = select_human_murder(conn, 'Alexander', '02-02-1980', '05-06-1983')
-#     # res5 = select_alien_ships_experiments(conn, 7, '02-02-1978', '02-02-2001')
-#     # print(res5)
+# -- прибулець викрадає людину
+def alien_kidnaps_human(conn, date, id_ship_to, id_human, id_alien):
+    query = """
+            INSERT INTO on_boarding (date, id_ship_from, id_ship_to, id_human, id_alien)
+            VALUES (%(date)s::date, NULL, %(id_ship_to)s, %(id_human)s, %(id_alien)s);
+            UPDATE human_passenger 
+            SET id_ship = (SELECT id_ship_to FROM on_boarding)
+            WHERE id_human = %(id_human)s
+            AND id_ship = NULL;
+    """
+
+    cur = conn.cursor()
+    data = ({"date": date,
+             "id_ship_to": id_ship_to, "id_human": id_human, "id_alien": id_alien})
+    cur.execute(query, data)
+    # return cur.fetchall()
+
+
+# -- людина тікає з космічного корабля
+def human_escapes_from_the_ship(conn, date, id_ship_from, id_human):
+    query = """
+           INSERT INTO on_boarding (date, id_ship_from, id_ship_to, id_human, id_alien)
+            VALUES (%(date)s::date, %(id_ship_from)s, NULL, %(id_human)s, NULL);
+            UPDATE human_passenger 
+            SET id_ship = NULL
+            WHERE id_human = %(id_human)s
+            AND id_ship = (SELECT id_ship_from FROM on_boarding);
+    """
+
+    cur = conn.cursor()
+    data = ({"date": date, "id_ship_from": id_ship_from, "id_human": id_human})
+    cur.execute(query, data)
+    # return cur.fetchall()
+
+
+# -- прибулець транспортує людину на iнший корабель
+def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_alien):
+    query = """
+            INSERT INTO on_boarding (date, id_ship_from, id_ship_to, id_human, id_alien)
+            VALUES (%(date)s::date, %(id_ship_from)s, %(id_ship_to)s, %(id_human)s, %(id_alien)s);
+            UPDATE human_passenger 
+            SET id_ship = (SELECT id_ship_from FROM on_boarding)
+            WHERE id_human = %(id_human)s
+            AND id_ship = (SELECT id_ship_to FROM on_boarding);
+    """
+
+    cur = conn.cursor()
+    data = ({"date": date, "id_ship_from": id_ship_from,
+             "id_ship_to": id_ship_to, "id_human": id_human, "id_alien": id_alien})
+    cur.execute(query, data)
+    # return cur.fetchall()
+
+
+# -- людина вбиває прибульця
+def human_kills_alien(conn, date, weapon, id_ship, id_human, id_alien):
+    query = """
+            INSERT INTO murder (date, weapon, id_ship, id_human, id_alien)
+            VALUES (%(date)s::date, %(weapon)s, %(id_ship)s, %(id_human)s, %(id_alien)s);
+            UPDATE alien_passenger
+            SET id_ship = NULL
+            WHERE id_alien = %(id_alien)s
+            AND id_ship = (SELECT id_ship FROM murder)
+    """
+
+    cur = conn.cursor()
+    data = ({"date": date, "weapon": weapon, "id_ship": id_ship,
+             "id_human": id_human, "id_alien": id_alien})
+    cur.execute(query, data)
+
+
+if __name__ == '__main__':
+    pass
+    # Connect to an existing database
+    # conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+    # alien_kidnaps_human(conn, '02-05-1972', 1, 8, 1, 1)
+    # alien_transports_human(conn, '02-05-1972', 1, 8, 1, 1)
+    # res = select_alien_kidnapping(conn, 'Paul%', 1, '01-05-1972', '01-06-1993')
+
+    # human_kills_alien(conn, '11-07-1980', 'bluster', 5, 2, 1)
+    # res2 = select_human_ships(conn, 5, '02-02-1970', '09-06-1990')
+    # res3 = select_human_kidnapping_aliens(conn, 16, '1992-03-06', '1992-03-06')
+    # res4 = select_human_murder(conn, 'Iva', '02-02-1979', '05-06-1988')
+    # res5 = select_alien_ships_experiments(conn, 7, '02-02-1978', '02-02-2001')
+    # print(res5)
+
+    # print(res4)
