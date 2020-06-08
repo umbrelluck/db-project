@@ -36,6 +36,7 @@ export default class Alien extends React.Component {
                     <li><NavLink to={this.props.match.url + '/e4'}>Провести екскурсію</NavLink></li>
                 </ul>
 
+                {/* <Route path={this.props.match.url + '/i1'} render={() => (<AFindNPeople />)} /> */}
                 <Route path={this.props.match.url + '/i1'} component={AFindNPeople} />
                 <Route path={this.props.match.url + '/i2'} component={AAllFindNPeople} />
                 <Route path={this.props.match.url + '/i3'} component={AExcAndExp} />

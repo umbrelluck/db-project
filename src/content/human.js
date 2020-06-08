@@ -15,11 +15,13 @@ import HKill from './events/h_kill'
 import Result from './result'
 
 export default class Human extends React.Component {
+
+
     render() {
-        // console.log(this.props.match)
         return (
             <div id="human">
                 <h3>Сектор двоногих</h3>
+
                 <ul className='ul_events_info'>
                     <p>Доступна інформація</p>
                     <li><NavLink to={this.props.match.url + '/i1'}>Для людини H знайти усi кораблi, де вона побувала за вказаний перiод</NavLink></li>
