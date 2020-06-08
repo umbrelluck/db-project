@@ -27,6 +27,9 @@ export default class AAllFindNPeople extends React.Component {
     }
 
     handler = () => {
+        // if (this.lst.length !== 0)
+        //     if (this.lst[0].length === 0)
+        //         this.lst = []
         var res = []
         var cnt = 0
         for (var elem of document.getElementsByTagName('input')) {

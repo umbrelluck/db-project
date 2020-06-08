@@ -6,11 +6,11 @@ export default class Login extends React.Component {
         return (
             <div id='login'>
                 <NavLink exact to='/alien'>
-                    <button>Alien</button>
+                    <button className='alien-b'>Alien</button>
                 </NavLink>
 
                 <NavLink exact to='/human'>
-                    <button>Human</button>
+                    <button className="human-b">Human</button>
                 </NavLink>
             </div>
         )
