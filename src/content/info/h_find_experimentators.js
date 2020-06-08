@@ -13,7 +13,7 @@ export default class HFindExp extends React.Component {
 
     async register(list, human, number, st_date, end_date) {
         console.log(list, human, number, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_human_experimentalists', {
+        const response = await axios.get('/get_select_human_experimentalists', {
             params: {
                 human_id: human,
                 n_aliens: number,

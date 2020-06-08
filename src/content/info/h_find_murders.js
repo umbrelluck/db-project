@@ -13,7 +13,7 @@ export default class HFindMurders extends React.Component {
 
     async register(list, human, st_date, end_date) {
         console.log(list, human, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_human_murder', {
+        const response = await axios.get('/get_select_human_murder', {
             params: {
                 human_first_name: human,
                 date_from: st_date,

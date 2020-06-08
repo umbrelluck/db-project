@@ -14,7 +14,7 @@ export default class HFindShips extends React.Component {
 
     async register(list, human, st_date, end_date) {
         console.log(list, human, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_human_ships', {
+        const response = await axios.get('/get_select_human_ships', {
             params: {
                 human_id: human,
                 date_from: st_date,

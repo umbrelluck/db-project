@@ -14,7 +14,7 @@ export default class AExcursion extends React.Component {
 
     async register(list, alien, number, st_date, end_date) {
         console.log(list, alien, number, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_alien_excursion', {
+        const response = await axios.get('/get_select_alien_excursion', {
             params: {
                 alien_id: alien,
                 n_humans: number,

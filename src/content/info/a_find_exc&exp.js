@@ -14,7 +14,7 @@ export default class AEcxAndExp extends React.Component {
 
     async register(list, human, alien, st_date, end_date) {
         console.log(list, human, alien, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_joint_exc_exp', {
+        const response = await axios.get('/get_select_joint_exc_exp', {
             params: {
                 human_first_name: human,
                 alien_name: alien,

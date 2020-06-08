@@ -13,7 +13,7 @@ export default class HStolenAndMurdered extends React.Component {
 
     async register(list, human) {
         console.log(list, human);
-        const response = await axios.get('http://localhost:5000/get_select_human_revenge', {
+        const response = await axios.get('/get_select_human_revenge', {
             params: {
                 human_id: human,
             }

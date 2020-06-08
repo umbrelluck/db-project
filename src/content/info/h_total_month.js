@@ -13,7 +13,7 @@ export default class HTotal extends React.Component {
 
     async register(list, year) {
         console.log(list, year);
-        const response = await axios.get('http://localhost:5000/get_select_all_kidnappings', {
+        const response = await axios.get('/get_select_all_kidnappings', {
             params: {
                 year: year
             }

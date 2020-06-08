@@ -13,7 +13,7 @@ export default class HStolenN extends React.Component {
 
     async register(list, number, st_date, end_date) {
         console.log(list, number, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_all_human_kidnapping', {
+        const response = await axios.get('/get_select_all_human_kidnapping', {
             params: {
                 n_times: number,
                 date_from: st_date,

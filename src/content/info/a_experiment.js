@@ -14,7 +14,7 @@ export default class AExperiments extends React.Component {
 
     async register(list, alien, st_date, end_date) {
         console.log(list, alien, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_alien_ships_experiments', {
+        const response = await axios.get('/get_select_alien_ships_experiments', {
             params: {
                 alien_id: alien,
                 date_from: st_date,
