@@ -17,12 +17,14 @@ def index():
 def get_select_alien_kidnapping():
     try:
         alien_name, n_times, date_from, date_to = request.args.get('alien_name', ''), \
-                                                  int(request.args.get('n_times', '')), \
-                                                  request.args.get('date_from', ''), \
-                                                  request.args.get('date_to', '')
+            int(request.args.get('n_times', '')), \
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = select_alien_kidnapping(conn, alien_name, n_times, date_from, date_to)
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = select_alien_kidnapping(
+            conn, alien_name, n_times, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
         return str(e)
@@ -32,10 +34,11 @@ def get_select_alien_kidnapping():
 def get_select_human_ships():
     try:
         human_id, date_from, date_to = request.args.get('human_id', ''), \
-                                                  request.args.get('date_from', ''), \
-                                                  request.args.get('date_to', '')
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = select_human_ships(conn, human_id, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
@@ -46,12 +49,14 @@ def get_select_human_ships():
 def get_select_human_kidnapping_aliens():
     try:
         human_id, n_times, date_from, date_to = request.args.get('human_id', ''), \
-                                                request.args.get('n_times', ''), \
-                                                request.args.get('date_from', ''), \
-                                                request.args.get('date_to', '')
+            request.args.get('n_times', ''), \
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = select_human_kidnapping_aliens(conn, human_id, n_times, date_from, date_to)
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = select_human_kidnapping_aliens(
+            conn, human_id, n_times, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
         return str(e)
@@ -61,10 +66,11 @@ def get_select_human_kidnapping_aliens():
 def get_select_human_murder():
     try:
         human_first_name, date_from, date_to = request.args.get('human_first_name', ''), \
-                                                  request.args.get('date_from', ''), \
-                                                  request.args.get('date_to', '')
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = select_human_murder(conn, human_first_name, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
@@ -76,7 +82,8 @@ def get_select_human_murder():
 def get_select_human_revenge():
     try:
         human_id = request.args.get('human_id', '')
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = select_human_revenge(conn, human_id)
         return jsonify(result=word)
     except Exception as e:
@@ -88,10 +95,11 @@ def get_select_human_revenge():
 def get_select_aliens_kidnapping():
     try:
         n_people, date_from, date_to = request.args.get('n_people', ''), \
-                                        request.args.get('date_from', ''), \
-                                        request.args.get('date_to', '')
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = select_aliens_kidnapping(conn, n_people, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
@@ -102,10 +110,11 @@ def get_select_aliens_kidnapping():
 def get_select_all_human_kidnapping():
     try:
         n_times, date_from, date_to = request.args.get('n_times', ''), \
-                                        request.args.get('date_from', ''), \
-                                        request.args.get('date_to', '')
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = select_all_human_kidnapping(conn, n_times, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
@@ -116,12 +125,14 @@ def get_select_all_human_kidnapping():
 def get_select_joint_exc_exp():
     try:
         human_first_name, alien_name, date_from, date_to = request.args.get('human_first_name', ''), \
-                                                            request.args.get('alien_name', ''), \
-                                                            request.args.get('date_from', ''), \
-                                                            request.args.get('date_to', '')
+            request.args.get('alien_name', ''), \
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = select_joint_exc_exp(conn,  human_first_name, alien_name, date_from, date_to)
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = select_joint_exc_exp(
+            conn,  human_first_name, alien_name, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
         return str(e)
@@ -133,12 +144,14 @@ def get_select_joint_exc_exp():
 def get_select_alien_excursion():
     try:
         alien_id, n_humans, date_from, date_to = request.args.get('alien_id', ''), \
-                                                request.args.get('n_humans', ''), \
-                                                request.args.get('date_from', ''), \
-                                                request.args.get('date_to', '')
+            request.args.get('n_humans', ''), \
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = select_alien_excursion(conn,  alien_id, n_humans, date_from, date_to)
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = select_alien_excursion(
+            conn,  alien_id, n_humans, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
         return str(e)
@@ -150,12 +163,14 @@ def get_select_alien_excursion():
 def get_select_human_experimentalists():
     try:
         human_id, n_aliens, date_from, date_to = request.args.get('human_id', ''), \
-                                                request.args.get('n_aliens', ''), \
-                                                request.args.get('date_from', ''), \
-                                                request.args.get('date_to', '')
+            request.args.get('n_aliens', ''), \
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = select_human_experimentalists(conn,  human_id, n_aliens, date_from, date_to)
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = select_human_experimentalists(
+            conn,  human_id, n_aliens, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
         return str(e)
@@ -166,12 +181,12 @@ def get_select_all_kidnappings():
     try:
         year = request.args.get('year', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = select_all_kidnappings(conn,  year)
         return jsonify(result=word)
     except Exception as e:
         return str(e)
-
 
 
 # -- 12. • вивести кораблi у порядку спадання сумарної кiлькостi еспериментiв, що були проведенi на
@@ -180,11 +195,13 @@ def get_select_all_kidnappings():
 def get_select_alien_ships_experiments():
     try:
         alien_id, date_from, date_to = request.args.get('alien_id', ''), \
-                                        request.args.get('date_from', ''), \
-                                        request.args.get('date_to', '')
+            request.args.get('date_from', ''), \
+            request.args.get('date_to', '')
 
-        conn = psycopg2.connect("dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = select_alien_ships_experiments(conn,  alien_id, date_from, date_to)
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = select_alien_ships_experiments(
+            conn,  alien_id, date_from, date_to)
         return jsonify(result=word)
     except Exception as e:
         return str(e)

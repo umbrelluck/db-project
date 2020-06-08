@@ -13,7 +13,7 @@ export default class AFindNPeople extends React.Component {
 
     async register(list, alien, number, st_date, end_date) {
         console.log(list, alien, number, st_date, end_date);
-        const response = await axios.get('http://localhost:5000/get_select_alien_kidnapping', {
+        const response = await axios.get('http://0.0.0.0:80/get_select_alien_kidnapping', {
             params: {
                 alien_name: alien,
                 n_times: number,
