@@ -6,6 +6,7 @@ import Result from '../result'
 import { Route } from 'react-router-dom'
 
 export default class AAllFindNPeople extends React.Component {
+
     constructor(props) {
         super(props);
         this.lst = []
