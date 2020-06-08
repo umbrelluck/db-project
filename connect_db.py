@@ -32,7 +32,7 @@ def select_alien_kidnapping(conn, alien_name, n_times, date_from, date_to):
 
 
 # 2. для людини H знайти усi кораблi, де вона побувала за вказаний перiод
-def select_human_ships(сonn, human_id, date_from, date_to):
+def select_human_ships(conn, human_id, date_from, date_to):
     cur = conn.cursor()
 
     query = """
@@ -169,7 +169,8 @@ def select_joint_exc_exp(conn, human_first_name, alien_name, date_from, date_to)
         AND excursion.date < (%s::date + '1 day'::interval);
     """
     cur = conn.cursor()
-    data = (alien_name, human_first_name, date_from, date_to, date_from, date_to)
+    data = (alien_name, human_first_name,
+            date_from, date_to, date_from, date_to)
     cur.execute(query, data)
     return cur.fetchall()
 
