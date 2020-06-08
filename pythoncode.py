@@ -207,7 +207,7 @@ def get_select_alien_ships_experiments():
         return str(e)
 
 
-if __name__ == "__main__":
-    app.run()
 # if __name__ == "__main__":
-#     app.run(host='0.0.0.0', debug=False, port=80)
+#     app.run()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=False, port=80)
