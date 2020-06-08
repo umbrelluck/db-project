@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from connect_db import *
+import os
 
 app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(app)
@@ -207,7 +208,7 @@ def get_select_alien_ships_experiments():
         return str(e)
 
 
-# if __name__ == "__main__":
-#     app.run()
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, port=80)
+    app.run()
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
