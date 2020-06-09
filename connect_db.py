@@ -176,7 +176,7 @@ def select_all_human_kidnapping(conn, n_times, date_from, date_to):
 # --8. • знайти усi спiльнi екскурсiї та експерименти для прибульця A та людини H за вказаний період
 def select_joint_exc_exp(conn, human_first_name, alien_name, date_from, date_to):
     query = """
-        SELECT experiment.id AS experiment, excursion.id AS excursion
+        SELECT DISTINCT experiment.id AS experiment, excursion.id AS excursion
         FROM experiment
         INNER JOIN human ON human.id = experiment.id_human
         INNER JOIN experiment_alien ON experiment_alien.id_experiment = experiment.id
