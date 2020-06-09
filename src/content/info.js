@@ -3,7 +3,7 @@ import React from 'react'
 var Info = () => (
     <div className="info">
         <h3>Інструкція</h3>
-        <p>Інструкцію можна прочитати <a target="_blank" rel="noopener noreferrer" href="https://github.com/umbrelluck/db-project/blob/master/README.md">тут</a>.</p>
+        <p>Інструкцію можна прочитати <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/document/d/1iy-2jxFGUFPUrZJYKnfeSjDCgSwzZMt0xnmscb9qAYI/edit?usp=sharing">тут</a>.</p>
         <p>A <a href="https://github.com/umbrelluck/db-project" target="_blank" rel="noopener noreferrer">тут</a> можна переглянути код (не треба).</p>
         <h3>Увага</h3>
         <p>Існує певна затримка (до 2-х секунд) між натиском кнопки "GO" та відображенням результату.</p>

@@ -322,7 +322,8 @@ def alien_kidnaps_human(conn, date, id_ship_to, id_human, id_alien):
              "id_ship_to": id_ship_to, "id_human": id_human, "id_alien": id_alien})
     try:
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
@@ -344,7 +345,8 @@ def human_escapes_from_the_ship(conn, date, id_ship_from, id_human):
 
     try:
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
@@ -367,7 +369,8 @@ def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_al
 
     try:
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
@@ -375,21 +378,33 @@ def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_al
 
 # -- людина вбиває прибульця
 def human_kills_alien(conn, date, weapon, id_ship, id_human, id_alien):
-    query = """
+    query1 = """
             INSERT INTO murder (date, weapon, id_ship, id_human, id_alien)
             VALUES (%(date)s::date, %(weapon)s, %(id_ship)s, %(id_human)s, %(id_alien)s);
+            
+    """
+    query2 = """
             UPDATE alien_passenger
             SET id_ship = NULL
-            WHERE id_alien = %(id_alien)s
-            AND id_ship = (SELECT id_ship FROM murder)
+            WHERE id_alien = %(id_alien)s;
     """
 
     cur = conn.cursor()
-    data = ({"date": date, "weapon": weapon, "id_ship": id_ship,
-             "id_human": id_human, "id_alien": id_alien})
+    data1 = ({"date": date, "weapon": weapon, "id_ship": id_ship,
+              "id_human": id_human, "id_alien": id_alien})
+
+    data2 = ({"id_alien": id_alien})
+
     try:
-        cur.execute(query, data)
-        return 0
+        cur.execute(query1, data1)
+        cur.close()
+
+        cur = conn.cursor()
+        cur.execute(query2, data2)
+
+        conn.commit()
+
+        return "Data sent"
 
     except Exception as e:
         return str(e)
@@ -413,6 +428,7 @@ def whole_table(conn, table_name):
 
 # EXCURSION PART ####################################################################################################################
 
+
 def excursion_set(conn, date, duration, price, id_alien, id_ship):
     query = """
             INSERT INTO excursion (date, duration, price, id_alien, id_ship)
@@ -420,9 +436,11 @@ def excursion_set(conn, date, duration, price, id_alien, id_ship):
         """
     try:
         cur = conn.cursor()
-        data = ({'date': date, 'duration': duration, 'price': price, 'id_alien': id_alien, 'id_ship': id_ship})
+        data = ({'date': date, 'duration': duration, 'price': price,
+                 'id_alien': id_alien, 'id_ship': id_ship})
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
@@ -437,12 +455,14 @@ def add_human_to_excursion(conn, id_excursion, id_human):
         cur = conn.cursor()
         data = ({'id_excursion': id_excursion, 'id_human': id_human})
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
 
 # EXPERIMENT PART ####################################################################################################################
+
 
 def experiment_set(conn, date, duration, description, id_human, id_ship):
     query = """
@@ -454,7 +474,8 @@ def experiment_set(conn, date, duration, description, id_human, id_ship):
         data = ({'date': date, 'duration': duration, 'description': description, 'id_human': id_human,
                  'id_ship': id_ship})
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
@@ -469,13 +490,13 @@ def add_alien_to_experiment(conn, id_experiment, id_alien):
         cur = conn.cursor()
         data = ({'id_experiment': id_experiment, 'id_alien': id_alien})
         cur.execute(query, data)
-        return 0
+        conn.commit()
+        return "Data sent"
 
     except Exception as e:
         return str(e)
 
 #####################################################################################################################
-
 
 
 
