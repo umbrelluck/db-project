@@ -13,12 +13,12 @@ export default class Experiment extends React.Component {
         }
     }
 
-    async register(id_experiment, id_human) {
-        console.log(id_experiment, id_human);
+    async register(id_experiment, id_alien) {
+        console.log(id_experiment, id_alien);
         const response = await axios.get('/get_add_human_to_experiment', {
             params: {
                 id_experiment: id_experiment,
-                id_human: id_human
+                id_alien: id_alien
             }
         });
         console.log("response = ", response)
@@ -68,7 +68,7 @@ export default class Experiment extends React.Component {
         return (
             (this.props.info.length !== 0) ?
                 (this.state.info.length !== 0) ?
-                    (this.info === "Invalid input") ?
+                    (this.info !== "Invalid input") ?
                         <div className="result">
                             {text}
                             <p>Now, add a human</p>
@@ -81,12 +81,12 @@ export default class Experiment extends React.Component {
                             {text}
                         </div>
 
-                    : (this.info === "Invalid input") ?
+                    : (this.info !== "Invalid input") ?
                         <div className="result">
                             {text}
-                            <p>Now, add a human</p>
+                            <p>Now, add an alien</p>
                             <input placeholder="Experiment ID"></input>
-                            <input placeholder="Human ID"></input>
+                            <input placeholder="Alien ID"></input>
                             <GO fun={this.handler} url={url}></GO>
                         </div>
                         : <div className="result">

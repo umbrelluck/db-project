@@ -68,7 +68,7 @@ export default class Excursion extends React.Component {
         return (
             (this.props.info.length !== 0) ?
                 (this.state.info.length !== 0) ?
-                    (this.info === "Invalid input") ?
+                    (this.info !== "Invalid input") ?
                         <div className="result">
                             {text}
                             <p>Now, add a human</p>
@@ -80,7 +80,7 @@ export default class Excursion extends React.Component {
                         : <div className="result">
                             {text}
                         </div>
-                    : (this.info === "Invalid input") ?
+                    : (this.info !== "Invalid input") ?
                         <div className="result">
                             {text}
                             <p>Now, add a human</p>

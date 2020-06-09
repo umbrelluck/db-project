@@ -317,6 +317,7 @@ def get_whole_table():
 
 # EXCURSION PART #################################################
 
+
 @app.route('/get_excursion_set', methods=["GET"])
 def get_excursion_set():
     try:
@@ -334,12 +335,13 @@ def get_excursion_set():
     except Exception as e:
         return str(e)
 
+
 @app.route('/get_add_human_to_excursion', methods=["GET"])
 def get_add_human_to_excursion():
     try:
         id_excursion, id_human = request.args.get('id_excursion', ''), \
             request.args.get('id_human', '')
-            
+
         conn = psycopg2.connect(
             "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = add_human_to_excursion(conn, id_excursion, id_human)
@@ -349,6 +351,7 @@ def get_add_human_to_excursion():
         return str(e)
 
 # EXPERIMENT PART #################################################
+
 
 @app.route('/get_experiment_set', methods=["GET"])
 def get_experiment_set():
@@ -361,18 +364,20 @@ def get_experiment_set():
 
         conn = psycopg2.connect(
             "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
-        word = experiment_set(conn, date, duration, description, id_human, id_ship)
+        word = experiment_set(conn, date, duration,
+                              description, id_human, id_ship)
         return jsonify(result=word)
 
     except Exception as e:
         return str(e)
+
 
 @app.route('/get_add_human_to_experiment', methods=["GET"])
 def get_add_alien_to_experiment():
     try:
         id_experiment, id_alien = request.args.get('id_experiment', ''), \
             request.args.get('id_alien', '')
-            
+
         conn = psycopg2.connect(
             "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
         word = add_alien_to_experiment(conn, id_experiment, id_alien)
@@ -380,7 +385,6 @@ def get_add_alien_to_experiment():
 
     except Exception as e:
         return str(e)
-
 
 
 if __name__ == "__main__":

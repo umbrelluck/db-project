@@ -14,14 +14,14 @@ export default class Aexperiment extends React.Component {
         }
     }
 
-    async register(date, duration, description, id_alien, id_ship) {
-        console.log(date, duration, description, id_alien, id_ship);
+    async register(date, duration, description, id_human, id_ship) {
+        console.log(date, duration, description, id_human, id_ship);
         const response = await axios.get('/get_experiment_set', {
             params: {
                 date: date,
                 duration: duration,
                 description: description,
-                id_alien: id_alien,
+                id_human: id_human,
                 id_ship: id_ship
             }
         });
@@ -66,7 +66,7 @@ export default class Aexperiment extends React.Component {
                 <input placeholder="Date (mnth-day-year)"></input>
                 <input placeholder="Duration"></input>
                 <input placeholder="Description"></input>
-                <input placeholder="Alien ID"></input>
+                <input placeholder="Human ID"></input>
                 <input placeholder="Ship ID"></input>
                 {/* <input></input> */}
                 <GO fun={this.handler} url={url}></GO>
@@ -78,7 +78,7 @@ export default class Aexperiment extends React.Component {
                     <input placeholder="Date (mnth-day-year)"></input>
                     <input placeholder="Duration"></input>
                     <input placeholder="Description"></input>
-                    <input placeholder="Alien ID"></input>
+                    <input placeholder="Human ID"></input>
                     <input placeholder="Ship ID"></input>
                     {/* <input></input> */}
                     <GO fun={this.handler} url={url}></GO>

@@ -356,11 +356,10 @@ def human_escapes_from_the_ship(conn, date, id_ship_from, id_human):
 def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_alien):
     query = """
             INSERT INTO on_boarding (date, id_ship_from, id_ship_to, id_human, id_alien)
-            VALUES (%(date)s::date, %(id_ship_from)s, %(id_ship_to)s, %(id_human)s, %(id_alien)s)
+            VALUES (%(date)s::date, %(id_ship_from)s, %(id_ship_to)s, %(id_human)s, %(id_alien)s);
             UPDATE human_passenger 
-            SET id_ship = (SELECT id_ship_from FROM on_boarding)
-            WHERE id_human = %(id_human)s
-            AND id_ship = (SELECT id_ship_to FROM on_boarding);
+            SET id_ship = %(id_ship_to)s
+            WHERE id_human = %(id_human)s;
     """
 
     cur = conn.cursor()
@@ -467,7 +466,7 @@ def add_human_to_excursion(conn, id_excursion, id_human):
 def experiment_set(conn, date, duration, description, id_human, id_ship):
     query = """
             INSERT INTO experiment (date, duration, description, id_human, id_ship)
-            VALUES (%(date)s::date, %(duration)s, %(price)s, %(id_alien)s, %(id_ship)s);
+            VALUES (%(date)s::date, %(duration)s, %(description)s, %(id_human)s, %(id_ship)s);
         """
     try:
         cur = conn.cursor()
