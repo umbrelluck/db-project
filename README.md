@@ -15,3 +15,7 @@ Link for the google doc: https://docs.google.com/document/d/1iy-2jxFGUFPUrZJYKnf
 ### ER Diagram:
 
 Link: https://github.com/umbrelluck/db-project/blob/master/scheme.png
+
+### VIDEO:
+
+Link: https://youtu.be/vPwgV0sWa1Y
