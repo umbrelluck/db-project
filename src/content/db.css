@@ -72,6 +72,29 @@ body {
     background-color: white;
     color: black;
 }
+.info{
+    display: fixed;
+    margin: auto;
+    margin-top:8vh;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(34, 34, 34);
+    min-height: 65vh;
+    width:95%;
+
+    border: 0.1em solid rgb(95, 51, 95);
+    box-shadow: 0px 0px 5px rgb(95, 51, 95);
+
+    font-size: 1.1rem;
+    font-family: 'Jura', sans-serif;
+
+    color: white;
+}
+
+.info a{
+    color:violet;
+    text-decoration: none;
+}
 
 /* //////// DATA INPUT ////////// */
 
@@ -302,9 +325,10 @@ footer {
 }
 
 footer p {
-    position: relative;
+    position: absolute;
     padding-top: 5px;
-    margin-left: 10%;
+    right:5vw;
+    /* margin-left: 60vw; */
 
     font-family: 'Jura', sans-serif;
     color: white;

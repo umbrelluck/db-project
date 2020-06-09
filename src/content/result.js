@@ -7,13 +7,16 @@ export default class Result extends React.Component {
         try {
             if (this.props.info.length !== 0)
                 if (this.props.info[0].length !== 0) {
-                    text = this.props.info.map((item) => (<p key={item[0]}>{item.join(", ")}</p>))
+                    text = this.props.info.map((item, id) => (<p key={id}>{item.join(", ")}</p>))
                     // text = this.props.info.map(item => item.join(", "))
                     // text = text.map(item => "<p>"+item+"</p>")
                 }
             console.log("text is ", text)
         } catch {
-            text = (<p>Can not connect to server</p>)
+            if (this.props.info.length === 0)
+                text = (<p>Can not connect to database server<br />142.93.163.88 seems to be down</p>)
+            else
+                text = (<p>{this.props.info}</p>)
             console.log("error: ", this.props.info)
         }
         return (
