@@ -19,7 +19,7 @@ export default class AAllFindNPeople extends React.Component {
         console.log(list, number, st_date, end_date);
         const response = await axios.get('/get_select_aliens_kidnapping', {
             params: {
-                n_times: number,
+                n_people: number,
                 date_from: st_date,
                 date_to: end_date
             }

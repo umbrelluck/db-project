@@ -140,7 +140,7 @@ def select_aliens_kidnapping(conn, n_people, date_from, date_to):
         AND on_boarding.id_ship_from IS NULL
         GROUP BY alien.id
         -- n times human condition
-        HAVING COUNT(DISTINCT on_boarding.id_human)>=%s;
+        HAVING COUNT(on_boarding.id_human)>=%s;
     """
 
     cur = conn.cursor()
@@ -162,7 +162,7 @@ def select_all_human_kidnapping(conn, n_times, date_from, date_to):
         AND on_boarding.date < (%s::date + '1 day'::interval)
         AND on_boarding.id_ship_from is NULL
         GROUP BY human_name
-        HAVING COUNT(on_boarding.id_human) >= %s;
+        HAVING COUNT(DISTINCT on_boarding.id_human) >= %s;
     """
     cur = conn.cursor()
     data = (date_from, date_to, n_times)
@@ -201,6 +201,8 @@ def select_joint_exc_exp(conn, human_first_name, alien_name, date_from, date_to)
 
 # -- 9. • для прибульця A та кожної екскурсiї, яку вiн проводив, знайти скiльки разiв за вказаний
 # --      перiод (з дати F по дату T) вiн проводив екскурсiю для щонайменше N людей;
+
+
 def select_alien_excursion(conn, alien_id, n_humans, date_from, date_to):
     query = """
             SELECT COUNT(*) FROM
@@ -250,6 +252,8 @@ def select_human_experimentalists(conn, human_id, n_aliens, date_from, date_to):
     return res
 
 # -- 11. •  знайти сумарну кiлькiсть викрадень по мiсяцях;
+
+
 def select_all_kidnappings(conn, year):
     query = """
             SELECT CASE
@@ -424,3 +428,13 @@ if __name__ == '__main__':
     # print(res5)
 
     # print(res4)
+
+
+# SELECT DISTINCT alien.name FROM alien
+#        JOIN on_boarding on on_boarding.id_alien = alien.id
+#         WHERE on_boarding.date >= '01-01-1800'::date
+#         AND on_boarding.date < ('01-01-2000'::date + '1 day'::interval)
+#         AND on_boarding.id_ship_from IS NULL
+#         GROUP BY alien.id
+#         -- n times human condition
+#         HAVING COUNT(on_boarding.id_human) >= 5;

@@ -94,7 +94,7 @@ def get_select_human_revenge():
 @app.route('/get_select_aliens_kidnapping', methods=["GET"])
 def get_select_aliens_kidnapping():
     try:
-        n_people, date_from, date_to = request.args.get('n_people', ''), \
+        n_people, date_from, date_to = int(request.args.get('n_people', '')), \
             request.args.get('date_from', ''), \
             request.args.get('date_to', '')
 
@@ -316,6 +316,7 @@ def get_whole_table():
         return str(e)
 
 ##################################################
+
 
 if __name__ == "__main__":
     app.run()
