@@ -49,7 +49,7 @@ export default class HFindExp extends React.Component {
         }
         console.log(this.lst, res);
         if (fl)
-            this.register(this.lst, res[0], res[1], res[2]);
+            this.register(this.lst, res[0], res[1], res[2], res[3]);
         else
             this.setState(state => ({
                 info: new Array(new Array("Invalid input"))
