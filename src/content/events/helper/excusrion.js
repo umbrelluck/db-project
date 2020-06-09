@@ -41,7 +41,7 @@ export default class Excursion extends React.Component {
         }
         console.log(res);
         if (fl)
-            this.register(res[0], res[1]);
+            this.register(res[5], res[6]);
         else
             this.setState(state => ({
                 info: new Array(new Array("Invalid input"))
