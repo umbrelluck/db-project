@@ -1,7 +1,15 @@
 #### Final Group Project for Database course, UCU, 2020.
 
-#### Team: 
-Solomia Dubnevych, Sofia Kravchuk, Sofia Romanchyk, Yaroslav Borys, Botsula Anna.
+### Team 1: 
+**Solomia Dubnevych** (ER diagram specialist & database wisdom creater)
+
+**Sofia Kravchuk** (FLASK specialist & incredible video creater)
+
+**Sofia Romanchyk** (SQL specialist & super-tester)
+
+**Yaroslav Borys** (Web-developer & debugger with nerves of steel)
+
+**Botsula Anna** (Backend developer & the calmest team lead)
 
 
 ### Link for the website
