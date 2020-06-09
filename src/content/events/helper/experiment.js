@@ -71,9 +71,9 @@ export default class Experiment extends React.Component {
                     (this.info !== "Invalid input") ?
                         <div className="result">
                             {text}
-                            <p>Now, add a human</p>
+                            <p>Now, add an alien</p>
                             <input placeholder="Experiment ID"></input>
-                            <input placeholder="Human ID"></input>
+                            <input placeholder="Alien ID"></input>
                             <GO fun={this.handler} url={url}></GO>
                             <Route path={url + '/result'} render={() => (<Result info={this.state.info} />)} />
                         </div>
