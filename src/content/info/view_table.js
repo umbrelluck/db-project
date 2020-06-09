@@ -52,8 +52,8 @@ export default class ViewTable extends React.Component {
                         <option value="murder">Murder</option>
                     </optgroup>
                     <optgroup label="Допоміжні таблиці">
-                        <option value="human_passanger">Human passanger</option>
-                        <option value="alien_passanger">Alien passanger</option>
+                        <option value="human_passenger">Human passenger</option>
+                        <option value="alien_passenger">Alien passenger</option>
                         <option value="on_boarding">On boarding</option>
                         <option value="experiment_alien">Experiment alien</option>
                         <option value="excursion_human">Excursion human</option>
