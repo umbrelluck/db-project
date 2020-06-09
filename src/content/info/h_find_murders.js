@@ -31,13 +31,23 @@ export default class HFindMurders extends React.Component {
     }
 
     handler = () => {
+        var fl = true
         var res = []
         for (var elem of document.getElementsByTagName('input')) {
             console.log(elem)
+            if (elem.value === "") {
+                fl = false
+                break
+            }
             res.push(elem.value)
         }
         console.log(this.lst, res);
-        this.register(this.lst, res[0], res[1], res[2]);
+        if (fl)
+            this.register(this.lst, res[0], res[1], res[2]);
+        else
+            this.setState(state => ({
+                info: new Array(new Array("Invalid input"))
+            }))
     }
 
 

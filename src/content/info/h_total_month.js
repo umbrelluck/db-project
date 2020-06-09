@@ -30,12 +30,22 @@ export default class HTotal extends React.Component {
 
     handler = () => {
         var res = []
+        var fl = true
         for (var elem of document.getElementsByTagName('input')) {
             console.log(elem)
+            if (elem.value === "") {
+                fl = false
+                break
+            }
             res.push(elem.value)
         }
         console.log(this.lst, res);
-        this.register(this.lst, res[0]);
+        if (fl)
+            this.register(this.lst, res[0]);
+        else
+            this.setState(state => ({
+                info: new Array(new Array("Invalid input"))
+            }))
     }
 
 

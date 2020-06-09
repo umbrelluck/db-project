@@ -207,6 +207,8 @@ def get_select_alien_ships_experiments():
         return str(e)
 
 
+####################################################################################################
+
 # -- прибулець викрадає людину
 @app.route('/get_alien_kidnaps_human', methods=["GET"])
 def get_alien_kidnaps_human():
@@ -280,8 +282,43 @@ def get_human_kills_alien():
     except Exception as e:
         return str(e)
 
+###############################################################################################
+
+# alien
+# alien_passenger
+
+# human
+# human_passenger
+
+# murder
+# excursion
+# excursion_human
+# experiment
+# experiment_aien
+
+# ship
+# on_boarding
+
+
+# type(table_name) = string
+@app.route('/get_whole_table', methods=["GET"])
+def get_whole_table():
+    try:
+        table_name = request.args.get('table_name', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = whole_table(
+            conn,  table_name)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+##################################################
 
 if __name__ == "__main__":
     app.run()
+
 # if __name__ == "__main__":
 #     app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))

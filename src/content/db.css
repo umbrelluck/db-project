@@ -125,6 +125,25 @@ body {
     box-shadow: 0px 0px 5px rgb(0, 247, 255);
 }
 
+#tables{
+    transition-duration: 0.5s;
+    height: 30px;
+    background-color: rgb(56, 56, 56);
+    border-color: rgb(0, 247, 255);
+    border-width: 2px;
+    padding: 0px 10px;
+    font-family: 'Jura', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#tables:focus{
+    outline: none;
+    border-color: rgb(0, 247, 255);
+    box-shadow: 0px 0px 5px rgb(0, 247, 255);
+}
+
 #alien .data_input input{
     border-color: rgb(73, 255, 134);
 }
@@ -157,6 +176,18 @@ body {
     color: white;
     font-size: 16px;
     font-weight: 700;
+}
+
+#alien #tables{
+    border-color: rgb(73, 255, 134);
+}
+
+#alien #tables:focus{
+    border-color: rgb(73, 255, 134);
+    outline: none;
+    text-decoration: none;
+    border-color: rgb(73, 255, 134);
+    box-shadow: 0px 0px 5px rgb(73, 255, 134);
 }
 
 

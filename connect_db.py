@@ -6,6 +6,7 @@
 
 # How to install: $ pip install psycopg2-binary
 import psycopg2
+from psycopg2 import sql
 
 
 # 1. для прибульця A знайти усiх людей, яких вiн викрадав хоча б N разiв за вказаний перiод
@@ -28,7 +29,10 @@ def select_alien_kidnapping(conn, alien_name, n_times, date_from, date_to):
     """
     data = (date_from, date_to, alien_name, n_times)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # 2. для людини H знайти усi кораблi, де вона побувала за вказаний перiод
@@ -47,7 +51,10 @@ def select_human_ships(conn, human_id, date_from, date_to):
     """
     data = (date_from, date_to, human_id)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # TODO: заповнити наступні таблички по прикладу попередніх
@@ -73,7 +80,10 @@ def select_human_kidnapping_aliens(conn, human_id, n_times, date_from, date_to):
         """
     data = (date_from, date_to, human_id, n_times)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # -- 4. • для людини H знайти усiх прибульцiв, яких вона вбила за вказаний перiод
@@ -92,7 +102,10 @@ def select_human_murder(conn, human_first_name, date_from, date_to):
     cur = conn.cursor()
     data = (human_first_name, date_from, date_to)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # -- 5. • для людини H знайти усiх прибульцiв, якi викрадали її та були вбитi нею ж;
@@ -111,7 +124,10 @@ def select_human_revenge(conn, human_id):
     cur = conn.cursor()
     data = [human_id]
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # -- 6. • знайти усiх прибульцiв якi викрали щонайменше N рiзних людей за вказаний перiод
@@ -130,7 +146,10 @@ def select_aliens_kidnapping(conn, n_people, date_from, date_to):
     cur = conn.cursor()
     data = (date_from, date_to, n_people)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # -- 7. • знайти усiх людей, яких викрадали хоча б N разiв за вказаний перiод (з дати F по дату T);
@@ -148,7 +167,10 @@ def select_all_human_kidnapping(conn, n_times, date_from, date_to):
     cur = conn.cursor()
     data = (date_from, date_to, n_times)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # --8. • знайти усi спiльнi екскурсiї та експерименти для прибульця A та людини H за вказаний період
@@ -172,8 +194,10 @@ def select_joint_exc_exp(conn, human_first_name, alien_name, date_from, date_to)
     data = (alien_name, human_first_name,
             date_from, date_to, date_from, date_to)
     cur.execute(query, data)
-    return cur.fetchall()
-
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 # -- 9. • для прибульця A та кожної екскурсiї, яку вiн проводив, знайти скiльки разiв за вказаний
 # --      перiод (з дати F по дату T) вiн проводив екскурсiю для щонайменше N людей;
@@ -194,7 +218,10 @@ def select_alien_excursion(conn, alien_id, n_humans, date_from, date_to):
     cur = conn.cursor()
     data = (alien_id, date_from, date_to, n_humans)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # --10. для людини H та кожного експерименту, у якому вона брала участь, знайти скiльки разiв
@@ -217,8 +244,10 @@ def select_human_experimentalists(conn, human_id, n_aliens, date_from, date_to):
     cur = conn.cursor()
     data = (human_id, date_from, date_to, n_aliens)
     cur.execute(query, data)
-    return cur.fetchall()
-
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 # -- 11. •  знайти сумарну кiлькiсть викрадень по мiсяцях;
 def select_all_kidnappings(conn, year):
@@ -243,7 +272,10 @@ def select_all_kidnappings(conn, year):
     """
     cur = conn.cursor()
     cur.execute(query, [year])
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # -- 12. • вивести кораблi у порядку спадання сумарної кiлькостi еспериментiв, що були проведенi на
@@ -264,7 +296,10 @@ def select_alien_ships_experiments(conn, alien_id, date_from, date_to):
     cur = conn.cursor()
     data = (alien_id, date_from, date_to)
     cur.execute(query, data)
-    return cur.fetchall()
+    colnames = [desc[0] for desc in cur.description]
+    res = cur.fetchall()
+    res.insert(0, tuple(colnames))
+    return res
 
 
 # -- прибулець викрадає людину
@@ -325,14 +360,13 @@ def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_al
     cur = conn.cursor()
     data = ({"date": date, "id_ship_from": id_ship_from,
              "id_ship_to": id_ship_to, "id_human": id_human, "id_alien": id_alien})
-    
+
     try:
         cur.execute(query, data)
         return 0
 
     except Exception as e:
         return str(e)
-
 
 
 # -- людина вбиває прибульця
@@ -356,6 +390,22 @@ def human_kills_alien(conn, date, weapon, id_ship, id_human, id_alien):
     except Exception as e:
         return str(e)
 
+#############################################
+
+
+def whole_table(conn, table_name):
+    query = sql.SQL("SELECT * FROM {} ;").format(sql.Identifier(table_name))
+
+    cur = conn.cursor()
+    try:
+        cur.execute(query)
+        colnames = [desc[0] for desc in cur.description]
+        res = cur.fetchall()
+        res.insert(0, tuple(colnames))
+        return res
+
+    except Exception as e:
+        return str(e)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 
+import ViewTable from './info/view_table'
 import AFindNPeople from './info/a_find_people_N'
 import AAllFindNPeople from './info/a_all_find_people_N'
 import AExcAndExp from './info/a_find_exc&exp'
@@ -21,6 +22,7 @@ export default class Alien extends React.Component {
                 <h3>Сектор чужих</h3>
                 <ul className='ul_events_info'>
                     <p>Доступна інформація</p>
+                    <li><NavLink to={this.props.match.url + '/i0'}>Дізнатися вміст таблиць</NavLink></li>
                     <li><NavLink to={this.props.match.url + '/i1'}>Для прибульця A знайти усiх людей, яких вiн викрадав хоча б N разiв за вказаний перiод</NavLink></li>
                     <li><NavLink to={this.props.match.url + '/i2'}>Знайти усiх прибульцiв якi викрали щонайменше N рiзних людей за вказаний перiод</NavLink></li>
                     <li><NavLink to={this.props.match.url + '/i3'}>Знайти усi спiльнi екскурсiї та експерименти для прибульця A та людини H за вказаний період</NavLink></li>
@@ -37,6 +39,7 @@ export default class Alien extends React.Component {
                 </ul>
 
                 {/* <Route path={this.props.match.url + '/i1'} render={() => (<AFindNPeople />)} /> */}
+                <Route path={this.props.match.url + '/i0'} component={ViewTable} />
                 <Route path={this.props.match.url + '/i1'} component={AFindNPeople} />
                 <Route path={this.props.match.url + '/i2'} component={AAllFindNPeople} />
                 <Route path={this.props.match.url + '/i3'} component={AExcAndExp} />

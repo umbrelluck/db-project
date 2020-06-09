@@ -34,8 +34,13 @@ export default class Hescape extends React.Component {
     handler = () => {
         var res = []
         var cnt = 0
+        var fl = true
         for (var elem of document.getElementsByTagName('input')) {
             console.log(elem)
+            if (elem.value === "") {
+                fl = false
+                break
+            }
             if (cnt === 0)
                 res.push(elem.value)
             else
@@ -43,7 +48,12 @@ export default class Hescape extends React.Component {
             cnt++;
         }
         console.log(this.lst, res);
-        this.register(res[0], res[1], res[2]);
+        if (fl)
+            this.register(res[0], res[1], res[2]);
+        else
+            this.setState(state => ({
+                info: new Array(new Array("Invalid input"))
+            }))
     }
 
     render() {
