@@ -411,6 +411,73 @@ def whole_table(conn, table_name):
     except Exception as e:
         return str(e)
 
+# EXCURSION PART ####################################################################################################################
+
+def excursion_set(conn, date, duration, price, id_alien, id_ship):
+    query = """
+            INSERT INTO excursion (date, duration, price, id_alien, id_ship)
+            VALUES (%(date)s::date, %(duration)s, %(price)s, %(id_alien)s, %(id_ship)s);
+        """
+    try:
+        cur = conn.cursor()
+        data = ({'date': date, 'duration': duration, 'price': price, 'id_alien': id_alien, 'id_ship': id_ship})
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
+
+
+def add_human_to_excursion(conn, id_excursion, id_human):
+    query = """
+            INSERT INTO excursion_human (id_excursion, id_human)
+            VALUES (%(id_excursion)s, %(id_human)s);
+        """
+    try:
+        cur = conn.cursor()
+        data = ({'id_excursion': id_excursion, 'id_human': id_human})
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
+
+# EXPERIMENT PART ####################################################################################################################
+
+def experiment_set(conn, date, duration, description, id_human, id_ship):
+    query = """
+            INSERT INTO experiment (date, duration, description, id_human, id_ship)
+            VALUES (%(date)s::date, %(duration)s, %(price)s, %(id_alien)s, %(id_ship)s);
+        """
+    try:
+        cur = conn.cursor()
+        data = ({'date': date, 'duration': duration, 'description': description, 'id_human': id_human,
+                 'id_ship': id_ship})
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
+
+
+def add_alien_to_experiment(conn, id_experiment, id_alien):
+    query = """
+            INSERT INTO experiment_alien (id_experiment, id_alien)
+            VALUES (%(id_experiment)s, %(id_alien)s);
+        """
+    try:
+        cur = conn.cursor()
+        data = ({'id_experiment': id_experiment, 'id_alien': id_alien})
+        cur.execute(query, data)
+        return 0
+
+    except Exception as e:
+        return str(e)
+
+#####################################################################################################################
+
+
+
 
 if __name__ == '__main__':
     pass

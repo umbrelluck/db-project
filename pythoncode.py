@@ -315,7 +315,72 @@ def get_whole_table():
     except Exception as e:
         return str(e)
 
-##################################################
+# EXCURSION PART #################################################
+
+@app.route('/get_excursion_set', methods=["GET"])
+def get_excursion_set():
+    try:
+        date, duration, price, id_alien, id_ship = request.args.get('date', ''), \
+            request.args.get('duration', ''), \
+            request.args.get('price', ''), \
+            request.args.get('id_alien', ''), \
+            request.args.get('id_ship', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = excursion_set(conn, date, duration, price, id_alien, id_ship)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+@app.route('/get_add_human_to_excursion', methods=["GET"])
+def get_add_human_to_excursion():
+    try:
+        id_excursion, id_human = request.args.get('id_excursion', ''), \
+            request.args.get('id_human', '')
+            
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = add_human_to_excursion(conn, id_excursion, id_human)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+# EXPERIMENT PART #################################################
+
+@app.route('/get_experiment_set', methods=["GET"])
+def get_experiment_set():
+    try:
+        date, duration, description, id_human, id_ship = request.args.get('date', ''), \
+            request.args.get('duration', ''), \
+            request.args.get('description', ''), \
+            request.args.get('id_human', ''), \
+            request.args.get('id_ship', '')
+
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = experiment_set(conn, date, duration, description, id_human, id_ship)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
+@app.route('/get_add_human_to_experiment', methods=["GET"])
+def get_add_alien_to_experiment():
+    try:
+        id_experiment, id_alien = request.args.get('id_experiment', ''), \
+            request.args.get('id_alien', '')
+            
+        conn = psycopg2.connect(
+            "dbname=db1 user=team1 password=password1 host=142.93.163.88 port=6006")
+        word = add_alien_to_experiment(conn, id_experiment, id_alien)
+        return jsonify(result=word)
+
+    except Exception as e:
+        return str(e)
+
 
 
 if __name__ == "__main__":
