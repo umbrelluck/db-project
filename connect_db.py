@@ -356,7 +356,7 @@ def human_escapes_from_the_ship(conn, date, id_ship_from, id_human):
 def alien_transports_human(conn, date, id_ship_from, id_ship_to, id_human, id_alien):
     query = """
             INSERT INTO on_boarding (date, id_ship_from, id_ship_to, id_human, id_alien)
-            VALUES (%(date)s::date, %(id_ship_from)s, %(id_ship_to)s, %(id_human)s, %(id_alien)s);
+            VALUES (%(date)s::date, %(id_ship_from)s, %(id_ship_to)s, %(id_human)s, %(id_alien)s)
             UPDATE human_passenger 
             SET id_ship = (SELECT id_ship_from FROM on_boarding)
             WHERE id_human = %(id_human)s
@@ -497,7 +497,6 @@ def add_alien_to_experiment(conn, id_experiment, id_alien):
         return str(e)
 
 #####################################################################################################################
-
 
 
 if __name__ == '__main__':
